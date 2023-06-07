@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="org.sunw.self.admin.user.manager.mapper.ManageManagerMapper">
+	<insert id="insert">
+		<selectKey order="AFTER" resultType="int">
+			SELECT INSERT_ID()
+		</selectKey>
+		INSERT INTO medical_appointment.ad_user
+		(
+		USER_ID, 
+		PASSWORD, 
+		NAME, 
+		BIRTH, 
+		SEX, 
+		PHONE_NUMBER, 
+		AUTH
+		)
+		VALUES
+		#{userId},
+		#{password},
+		#{name},
+		#{birth},
+		#{sex},
+		#{phoneNumber},
+		#{auth}
+		)
+	</insert>
+
+
+
+	<select id="getAllUsers"
+	resultType="org.sunw.self.admin.user.user.domain.ManageUserVO"
+	parameterType="org.sunw.self.admin.user.user.domain.ManageUserDTO">
+	SELECT USER_ID,
+		PASSWORD, 
+		NAME, 
+		BIRTH, 
+		SEX, 
+		PHONE_NUMBER, 
+		AUTH
+	FROM medical_appointment.ad_user
+	<if test='name != null and name != "" '>
+		WHERE NAME LIKE CONCAT('%',#{name},'%')
+		</if>
+	ORDER BY USER_ID DESC
+	LIMIT #{skip},
+		#{perSheet}
+	</select>
+	
+	
+	<select id="getUserById"
+	resultType="org.sunw.self.admin.user.user.domain.ManageUserVO">
+	SELECT USER_ID,
+		PASSWORD, 
+		NAME, 
+		BIRTH, 
+		SEX, 
+		PHONE_NUMBER, 
+		AUTH
+	FROM medical_appointment.ad_user
+	WHERE USER_ID=#{userId}
+	</select>
+
+
+	<update id="update">
+		UPDATE medical_appointment.ad_user
+		SET 
+		PASSWORD			=#{password}, 
+		NAME				=#{name}, 
+		BIRTH				=#{birth}, 
+		SEX					=#{sex}, 
+		PHONE_NUMBER		=#{phoneNumber}, 
+		AUTH				=#{auth}
+		WHERE USER_ID		=#{userId}
+	</update>
+
+	
+	
+	<delete id="delete">
+	DELETE FROM medical_appointment.ad_user
+	WHERE USER_ID=#{userId}
+	</delete>
+
+
+
+	
+</mapper>

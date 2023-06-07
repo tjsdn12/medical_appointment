@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="org.sunw.self.admin.equipment.model.mapper.EquipmentModelMapper">
+	<insert id="insert">
+		<selectKey order="AFTER" resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO SELF_WASH.EQUIPMENT_MODEL
+		(
+		EQUIPMENT_MODEL_ID,
+		EQUIPMENT_NAME,
+		MANUFACTURING_COMPANY,
+		MANUFACTURER_NUMBER,
+		CATEGORY_ID,
+		REPAIRER,
+		REPAIRER_NUMBER,
+		EQUIPMENT_PHOTO,
+		EQUIPMENT_SPEC,
+		CAPACITY_GB,
+		EQUIPMENT_TYPE
+		)
+		VALUES
+		(
+		#{equipmentModelId},
+		#{equipmentName},
+		#{manufacturingCompany},
+		#{manufacturerNumber},
+		#{categoryId},
+		#{repairer},
+		#{repairerNumber},
+		#{equipmentPhoto},
+		#{equipmentSpec},
+		#{capacityGb},
+		#{equipmentType}
+		)
+	</insert>
+
+	<select id="getAllEquipmentModelList"
+		resultType="org.sunw.self.admin.equipment.model.domain.EquipmentModelVO">
+		SELECT EQUIPMENT_MODEL_ID,
+		EQUIPMENT_NAME,
+		MANUFACTURING_COMPANY,
+		MANUFACTURER_NUMBER,
+		CATEGORY_ID,
+		REPAIRER,
+		REPAIRER_NUMBER,
+		EQUIPMENT_PHOTO,
+		EQUIPMENT_SPEC,
+		CAPACITY_GB,
+		EQUIPMENT_TYPE
+		FROM EQUIPMENT_MODEL
+		<if test='equipmentName != null and equipmentName != "" '>
+			WHERE EQUIPMENT_NAME LIKE CONCAT('%',#{equipmentName},'%')
+		</if>
+		ORDER BY EQUIPMENT_MODEL_ID DESC
+		LIMIT #{skip} ,
+		#{perSheet}
+	</select>
+
+	<select id="getEquipmentModelCnt" resultType="int">
+		SELECT COUNT(*)
+		FROM EQUIPMENT_MODEL
+	</select>
+
+	<select id="getOneEquipmentModel"
+		resultType="org.sunw.self.admin.equipment.model.domain.EquipmentModelVO">
+		SELECT EQUIPMENT_MODEL_ID,
+		EQUIPMENT_NAME,
+		MANUFACTURING_COMPANY,
+		MANUFACTURER_NUMBER,
+		CATEGORY_ID,
+		REPAIRER,
+		REPAIRER_NUMBER,
+		EQUIPMENT_PHOTO,
+		EQUIPMENT_SPEC,
+		CAPACITY_GB,
+		EQUIPMENT_TYPE
+		FROM EQUIPMENT_MODEL
+		WHERE EQUIPMENT_MODEL_ID=#{equipmentModelId}
+	</select>
+
+	<update id="update">
+		UPDATE EQUIPMENT_MODEL
+		SET
+		EQUIPMENT_NAME = #{equipmentName},
+		MANUFACTURING_COMPANY = #{manufacturingCompany},
+		MANUFACTURER_NUMBER = #{manufacturerNumber},
+		CATEGORY_ID = #{categoryId},
+		REPAIRER = #{repairer},
+		REPAIRER_NUMBER = #{repairerNumber},
+		EQUIPMENT_PHOTO = #{equipmentPhoto},
+		EQUIPMENT_SPEC = #{equipmentSpec},
+		CAPACITY_GB = #{capacityGb},
+		EQUIPMENT_TYPE = #{equipmentType}
+		WHERE EQUIPMENT_MODEL_ID = #{equipmentModelId}
+	</update>
+
+	<delete id="delete">
+		DELETE FROM EQUIPMENT_MODEL WHERE EQUIPMENT_MODEL_ID=#{equipmentModelId};
+	</delete>
+	
+</mapper>
+
+		
