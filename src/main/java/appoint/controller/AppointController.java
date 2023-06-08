@@ -1,4 +1,4 @@
-package org.sunw.self.admin.appoint.controller;
+package appoint.controller;
 
 
 import java.util.List;

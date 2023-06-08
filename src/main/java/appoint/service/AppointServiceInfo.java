@@ -1,4 +1,4 @@
-package org.sunw.self.admin.infomation.store.service;
+package appoint.service;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class StoreInfoServiceInfo implements StoreInfoService {
+public class AppointServiceInfo implements AppointService {
 	
 	private final StoreInfoMapper storeInfoMapper;
 	

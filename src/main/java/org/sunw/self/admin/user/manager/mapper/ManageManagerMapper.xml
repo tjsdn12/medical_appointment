@@ -4,7 +4,9 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper
 	namespace="org.sunw.self.admin.user.manager.mapper.ManageManagerMapper">
-	<insert id="insert">
+	
+	<!-- 새로운 회원 메니져 등록 -->
+	<insert id="managerInsert">
 		<selectKey order="AFTER" resultType="int">
 			SELECT INSERT_ID()
 		</selectKey>
@@ -30,7 +32,7 @@
 	</insert>
 
 
-
+	<!-- 이름에 대한 검색결과 NAME이 NULL이아닐경우 값을 NAME에대한 값을 가져옴  -->
 	<select id="getAllUsers"
 	resultType="org.sunw.self.admin.user.user.domain.ManageUserVO"
 	parameterType="org.sunw.self.admin.user.user.domain.ManageUserDTO">
@@ -50,7 +52,7 @@
 		#{perSheet}
 	</select>
 	
-	
+	<!-- 회원 매니져 조회 -->
 	<select id="getUserById"
 	resultType="org.sunw.self.admin.user.user.domain.ManageUserVO">
 	SELECT USER_ID,
@@ -64,8 +66,8 @@
 	WHERE USER_ID=#{userId}
 	</select>
 
-
-	<update id="update">
+	<!-- 수정 -->
+	<update id="managerUpdate">
 		UPDATE medical_appointment.ad_user
 		SET 
 		PASSWORD			=#{password}, 
@@ -78,8 +80,8 @@
 	</update>
 
 	
-	
-	<delete id="delete">
+	<!-- 삭제 -->
+	<delete id="managerDelete">
 	DELETE FROM medical_appointment.ad_user
 	WHERE USER_ID=#{userId}
 	</delete>

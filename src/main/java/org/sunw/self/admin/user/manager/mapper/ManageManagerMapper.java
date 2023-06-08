@@ -10,7 +10,7 @@ import org.sunw.self.admin.user.manager.domain.ManageManagerVO;
 
 public interface ManageManagerMapper {
 	
-	public int insert(ManageManagerVO manageManagerVO);
+	public int managerInsert(ManageManagerVO manageManagerVO);
 	
 	public List<ManageManagerVO> getAllUsers(ManageManagerDTO manageManagerDTO);
 	
@@ -18,9 +18,9 @@ public interface ManageManagerMapper {
 	ManageManagerVO getUserById(@Param("userId") String userId);
 	
 	
-	public int update(ManageManagerVO manageManagerVO);
+	public int managerUpdate(ManageManagerVO manageManagerVO);
 	
-	public int delete(String userId);
+	public int managerDelete(String userId);
 	
 	
 }
