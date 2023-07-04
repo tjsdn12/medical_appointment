@@ -32,7 +32,7 @@ import lombok.extern.log4j.Log4j;
 @Controller
 @Log4j
 @RequestMapping("/info/storeinfo")
-public class ReservationController {
+public class AppointController {
 	@Autowired
 	StoreInfoService storeInfoService;
 	
