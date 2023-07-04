@@ -32,15 +32,6 @@ import lombok.extern.log4j.Log4j;
 public class ManageUserController {
 	@Autowired
 	ManageUserService manageUserService;
-	
-	@GetMapping("/list")
-	public void list(ManageUserDTO manageUserDTO,Model model) {
-		
-		model.addAttribute("getAllUserList", manageUserService.getAllUserList(manageUserDTO));
-		PageMaker pageMaker = new PageMaker(manageUserDTO, manageUserService.getUserListCnt(manageUserDTO));
-		model.addAttribute("pageMaker", pageMaker);
-	}
-	
 	@GetMapping("/form")
 	public void form(ManageUserDTO manageUserDTO ,Model model) {
 		ManageUserDTO getOne = manageUserService.getOneUser(manageUserDTO.getMemId());

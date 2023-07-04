@@ -12,5 +12,5 @@ public class AppointDTO extends DefaultDTO{
 	String sId;
 	
 	String sName;
-
+ 
 }
