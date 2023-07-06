@@ -8,6 +8,8 @@ import lombok.Data;
 public class ManageManagerDTO extends DefaultDTO {
 	
 	ManageManagerVO manageManagerVO;
+
+	
 	
 
 	

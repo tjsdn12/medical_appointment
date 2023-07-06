@@ -33,7 +33,7 @@
 
 
 	<!-- 이름에 대한 검색결과 NAME이 NULL이아닐경우 값을 NAME에대한 값을 가져옴  -->
-	<select id="getAllUsers"
+	<select id="getAllManagerList"
 	resultType="org.sunw.self.admin.user.user.domain.ManageUserVO"
 	parameterType="org.sunw.self.admin.user.user.domain.ManageUserDTO">
 	SELECT USER_ID,
@@ -86,7 +86,11 @@
 	WHERE USER_ID=#{userId}
 	</delete>
 
-
+	
+	<select id="getManagerListCnt" resultType="int">
+	SELECT COUNT(*)
+	FROM medical_appointment.ad_user
+	</select>
 
 	
 </mapper>

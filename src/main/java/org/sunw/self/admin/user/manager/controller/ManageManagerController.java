@@ -45,7 +45,7 @@ public class ManageManagerController {
 	
 	@GetMapping("/form")
 	public void form(ManageManagerDTO manageManagerDTO, Model model) {
-		ManageManagerDTO getOne = manageManagerService.getOneManager(manageManagerDTO.getMgrId());
+		ManageManagerDTO getOne = manageManagerService.getOneManager(manageManagerDTO.userId());
 		model.addAttribute("manageManagerVO",getOne.getManageManagerVO());
 		log.info(model);
 		
@@ -60,7 +60,7 @@ public class ManageManagerController {
 	@ResponseStatus(HttpStatus.OK)
 	public ResultDTO delete(@RequestBody ManageManagerDTO manageManagerDTO) {
 		ResultDTO result =new ResultDTO();
-		boolean isSuccess = manageManagerService.delete(manageManagerDTO.getManageManagerVO().getMgrId())>0;
+		boolean isSuccess = manageManagerService.delete(manageManagerDTO.getManageManagerVO().userId())>0;
 		result.setSuccess(isSuccess);
 		String message = isSuccess?"삭제되었습니다.":"오류가 발생하였습니다.";
 		result.setMessage(message);
@@ -69,7 +69,7 @@ public class ManageManagerController {
 	
 	@GetMapping("/detail")
 	public void selectManager(ManageManagerDTO manageManagerDTO,Model model) {
-		ManageManagerDTO getOne = manageManagerService.getOneManager(manageManagerDTO.getMgrId());
+		ManageManagerDTO getOne = manageManagerService.getOneManager(manageManagerDTO.userId());
 		model.addAttribute("manageManagerVO",getOne.getManageManagerVO());
 		log.info(model);
 	}
@@ -79,7 +79,7 @@ public class ManageManagerController {
 	@ResponseStatus(HttpStatus.OK)
 	public ResultDTO save(@RequestBody ManageManagerDTO manageManagerDTO) {
 		ResultDTO result = new ResultDTO();
-		boolean isSuccess = manageManagerService.update(manageManagerDTO)>0;
+		boolean isSuccess = manageManagerService.manageUpdate(manageManagerDTO)>0;
 		result.setSuccess(isSuccess);
 		String message = isSuccess?"저장에 성공하였습니다.":"오류가 발생하였습니다.";
 		result.setMessage(message);
@@ -91,7 +91,7 @@ public class ManageManagerController {
 	@ResponseStatus(HttpStatus.OK)
 	public ResultDTO register(@RequestBody ManageManagerDTO manageManagerDTO) {
 		ResultDTO result = new ResultDTO();
-		boolean isSuccess = manageManagerService.insert(manageManagerDTO)>0;
+		boolean isSuccess = manageManagerService.managerInsert(manageManagerDTO)>0;
 		result.setSuccess(isSuccess);
 		String message = isSuccess?"저장에 성공하였습니다.":"오류가 발생하였습니다.";
 		result.setMessage(message);
@@ -100,7 +100,7 @@ public class ManageManagerController {
 	
 	@GetMapping("/register")
 	public void register(ManageManagerDTO manageManagerDTO, Model model) {
-		ManageManagerDTO getOne = manageManagerService.getOneManager(manageManagerDTO.getMgrId());
+		ManageManagerDTO getOne = manageManagerService.getOneManager(manageManagerDTO.getUserId());
 		model.addAttribute("manageManagerVO",getOne.getManageManagerVO());
 		log.info(model);
 		model.addAttribute("getStoreList", manageManagerService.getStoreList());
@@ -108,16 +108,6 @@ public class ManageManagerController {
 
 	}
 	
-	@PostMapping("/register")
-	@ResponseBody
-	@ResponseStatus(HttpStatus.OK)
-	public ResultDTO phoneCheck(@RequestBody ManageManagerDTO manageManagerDTO) {
-		ResultDTO result = new ResultDTO();
-		boolean isSuccess = manageManagerService.phoneCheck(manageManagerDTO)==0;
-		result.setSuccess(isSuccess);
-		String message = isSuccess?"사용할수있는 번호입니다.":"사용할수없는 번호입니다.";
-		result.setMessage(message);
-		return result;
-	}
+
 
 }

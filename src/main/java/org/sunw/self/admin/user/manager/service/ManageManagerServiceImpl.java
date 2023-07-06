@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.sunw.self.admin.user.manager.domain.ManageManagerDTO;
 import org.sunw.self.admin.user.manager.domain.ManageManagerVO;
 import org.sunw.self.admin.user.manager.mapper.ManageManagerMapper;
+import org.sunw.self.admin.user.user.domain.ManageUserDTO;
 
 
 @Service
@@ -28,9 +29,9 @@ public class ManageManagerServiceImpl implements ManageManagerService {
 		return manageManagerMapper.managerInsert(dto.getManageManagerVO());
 	}
 	@Override
-	public List<ManageManagerVO> getAllUsers(ManageManagerDTO dto) {
+	public List<ManageManagerVO> getAllManagerList(ManageManagerDTO dto) {
 
-		List<ManageManagerVO> userList = manageManagerMapper.getAllUsers(dto);
+		List<ManageManagerVO> userList = manageManagerMapper.getAllManagerList(dto);
 		
 		return userList;
 	}
@@ -43,6 +44,12 @@ public class ManageManagerServiceImpl implements ManageManagerService {
 	    public int managerDelete(String userId) { 
 	        return manageManagerMapper.managerDelete(userId);
 	    }
+
+	@Override
+	public int getManagerListCnt(ManageUserDTO manageUserDTO) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 
 }

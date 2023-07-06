@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.sunw.self.admin.user.manager.domain.ManageManagerDTO;
 import org.sunw.self.admin.user.manager.domain.ManageManagerVO;
+import org.sunw.self.admin.user.user.domain.ManageUserDTO;
 
 public interface ManageManagerService {
 
@@ -12,7 +13,7 @@ public interface ManageManagerService {
 	public int managerInsert(ManageManagerDTO dto);
 	//등록
 	
-	List<ManageManagerVO>getAllUsers (ManageManagerDTO manageManagerDTO);
+	List<ManageManagerVO>getAllManagerList (ManageManagerDTO manageManagerDTO);
 	//이름에 대한 검색결과
 	
 	ManageManagerVO getUserById(String userId);
@@ -23,5 +24,7 @@ public interface ManageManagerService {
 	
 	int managerDelete(String userId); 
 	//삭제
+	
+	public int getManagerListCnt(ManageManagerDTO manageManagerDTO);
 	
 }
