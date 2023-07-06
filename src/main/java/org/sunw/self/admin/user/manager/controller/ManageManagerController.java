@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.sunw.self.admin.common.domain.PageMaker;
 import org.sunw.self.admin.common.domain.ResultDTO;
 import org.sunw.self.admin.user.manager.domain.ManageManagerDTO;
+import org.sunw.self.admin.user.manager.domain.ManageManagerVO;
 import org.sunw.self.admin.user.manager.service.ManageManagerService;
 
 import lombok.extern.log4j.Log4j;
@@ -42,25 +43,13 @@ public class ManageManagerController {
 		model.addAttribute("pageMaker", pageMaker);
 	}
 	
-	
-	@GetMapping("/form")
-	public void form(ManageManagerDTO manageManagerDTO, Model model) {
-		ManageManagerDTO getOne = manageManagerService.getOneManager(manageManagerDTO.userId());
-		model.addAttribute("manageManagerVO",getOne.getManageManagerVO());
-		log.info(model);
-		
-		model.addAttribute("getStoreList", manageManagerService.getStoreList());
-		
-	}
-	
-	
-	
+
 	@DeleteMapping("/list")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
 	public ResultDTO delete(@RequestBody ManageManagerDTO manageManagerDTO) {
 		ResultDTO result =new ResultDTO();
-		boolean isSuccess = manageManagerService.delete(manageManagerDTO.getManageManagerVO().userId())>0;
+		boolean isSuccess = manageManagerService.managerDelete(manageManagerDTO.getManageManagerVO().userId())>0;
 		result.setSuccess(isSuccess);
 		String message = isSuccess?"삭제되었습니다.":"오류가 발생하였습니다.";
 		result.setMessage(message);
@@ -68,9 +57,9 @@ public class ManageManagerController {
 	}
 	
 	@GetMapping("/detail")
-	public void selectManager(ManageManagerDTO manageManagerDTO,Model model) {
-		ManageManagerDTO getOne = manageManagerService.getOneManager(manageManagerDTO.userId());
-		model.addAttribute("manageManagerVO",getOne.getManageManagerVO());
+	public void getUserById(ManageManagerDTO manageManagerDTO,Model model) {
+		ManageManagerVO getOne = manageManagerService.getUserById(manageManagerDTO.userId());
+		model.addAttribute("manageManagerVO",getOne.getUserId());
 		log.info(model);
 	}
 	
@@ -98,15 +87,7 @@ public class ManageManagerController {
 		return result;
 	}
 	
-	@GetMapping("/register")
-	public void register(ManageManagerDTO manageManagerDTO, Model model) {
-		ManageManagerDTO getOne = manageManagerService.getOneManager(manageManagerDTO.getUserId());
-		model.addAttribute("manageManagerVO",getOne.getManageManagerVO());
-		log.info(model);
-		model.addAttribute("getStoreList", manageManagerService.getStoreList());
-	
 
-	}
 	
 
 

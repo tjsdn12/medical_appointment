@@ -45,8 +45,9 @@ public class ManageManagerServiceImpl implements ManageManagerService {
 	        return manageManagerMapper.managerDelete(userId);
 	    }
 
+
 	@Override
-	public int getManagerListCnt(ManageUserDTO manageUserDTO) {
+	public int getManagerListCnt(ManageManagerDTO manageManagerDTO) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

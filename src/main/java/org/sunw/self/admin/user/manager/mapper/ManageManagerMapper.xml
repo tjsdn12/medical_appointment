@@ -21,6 +21,7 @@
 		AUTH
 		)
 		VALUES
+		(
 		#{userId},
 		#{password},
 		#{name},

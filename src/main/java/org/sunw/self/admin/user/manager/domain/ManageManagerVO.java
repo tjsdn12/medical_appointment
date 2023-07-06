@@ -23,4 +23,12 @@ public class ManageManagerVO {
 	String phoneNumber;
 	String auth;
 
+	
+	public String userId() {
+        return userId;
+    }
+	
+	
 }
+
+

@@ -25,6 +25,8 @@ public interface ManageManagerService {
 	int managerDelete(String userId); 
 	//삭제
 	
-	public int getManagerListCnt(ManageManagerDTO manageManagerDTO);
+	int getManagerListCnt(ManageManagerDTO manageManagerDTO);
+
+
 	
 }

@@ -7,10 +7,12 @@ import lombok.Data;
 @Data
 public class ManageManagerDTO extends DefaultDTO {
 	
-	ManageManagerVO manageManagerVO;
+	private ManageManagerVO manageManagerVO;
 
 	
-	
+public String userId() {
+	return manageManagerVO.getUserId();
+}
 
 	
 }

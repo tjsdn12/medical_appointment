@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="org.sunw.self.admin.category.mapper.CategoryMapper">
+	
+	<insert id="categoryInsert">
+	<selectKey order="AFTER" resultType="int">
+			SELECT INSERT_ID()
+		</selectKey>
+		INSERT INTO clinic.ad_category
+		(
+		CATEGORY_LEVEL,
+		CATEGORY_NAME,
+		USE_YN,
+		UPPER_CATEGORY_ID
+		)
+		VALUES
+		(
+		#{categoryLevel},
+		#{categoryName},
+		#{useYn},
+		#{upperCategoryId}
+		)
+	</insert>
+	
+	<select id="getCategoryList"
+	resultType="org.sunw.self.admin.category.domain.CategoryVO"
+	parameterType="org.sunw.self.admin.category.domain.CategoryDTO">
+	SELECT CATEGORY_ID,
+		CATEGORY_LEVEL,
+		CATEGORY_NAME,
+		USE_YN,
+		UPPER_CATEGORY_ID
+	FROM clinic.ad_category;
+	<if test='categoryName != null and categoryName != "" '>
+		WHERE CATEGORY_NAME LIKE CONCAT('%',#{categoryName},'%')
+		</if>
+	ORDER BY CATEGORY_ID DESC
+	LIMIT #{skip},
+		#{perSheet}
+	</select>
+	
+	<select id="getCategoryId"
+	resultType="org.sunw.self.admin.category.domain.CategoryVO">
+	SELECT CATEGORY_ID,
+		CATEGORY_LEVEL,
+		CATEGORY_NAME,
+		USE_YN,
+		UPPER_CATEGORY_ID
+	FROM clinic.ad_category
+	WHERE CATEGORY_ID = #{categoryId}
+	</select>
+	
+	<update id="categoryUpdate">
+	UPDATE clinic.ad_category
+	SET
+	CATEGORY_LEVEL		=#{categoryLevel},
+	CATEGORY_NAME		=#{categoryName},
+	USE_YN				=#{useYn},
+	UPPER_CATEGORY_ID	=#{upperCategoryId}
+	WHERE CATEGORY_ID	=#{categoryId}
+	</update>
+	
+	<delete id="categoryDelete">
+	DELETE FROM clinic.ad_category
+	WHERE CATEGORY_ID=#{categoryId}
+	</delete>
+	
+	<select id="categoryListCnt" resultType="int">
+	SELECT COUNT(*)
+	FROM clinic.ad_category
+	</select>
+
+
+</mapper>
