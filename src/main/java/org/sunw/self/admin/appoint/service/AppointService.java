@@ -6,7 +6,7 @@ import org.sunw.self.admin.appoint.domain.AppointDTO;
 import org.sunw.self.admin.appoint.domain.AppointVO;
 import org.sunw.self.admin.pg.program.domain.ProgramVO;
 import org.sunw.self.admin.room.domain.RoomVO;
-import org.sunw.self.admin.user.user.domain.ManageUserVO;
+import org.sunw.self.admin.user.domain.ManageUserVO;
 
 public interface AppointService {
 	

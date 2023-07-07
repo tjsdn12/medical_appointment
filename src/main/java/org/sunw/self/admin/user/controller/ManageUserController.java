@@ -1,4 +1,4 @@
-package org.sunw.self.admin.user.user.controller;
+package org.sunw.self.admin.user.controller;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
 
@@ -20,21 +20,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.sunw.self.admin.common.domain.PageMaker;
 import org.sunw.self.admin.common.domain.ResultDTO;
-import org.sunw.self.admin.user.manager.domain.ManageManagerDTO;
-import org.sunw.self.admin.user.user.domain.ManageUserDTO;
-import org.sunw.self.admin.user.user.service.ManageUserService;
+import org.sunw.self.admin.user.domain.ManageUserDTO;
+import org.sunw.self.admin.user.service.ManageUserService;
 
 import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
-@RequestMapping("/user/user")
+@RequestMapping("/user")
 public class ManageUserController {
 	@Autowired
 	ManageUserService manageUserService;
 	@GetMapping("/form")
 	public void form(ManageUserDTO manageUserDTO ,Model model) {
-		ManageUserDTO getOne = manageUserService.getOneUser(manageUserDTO.getMemId());
+		ManageUserDTO getOne = manageUserService.getOneUser(manageUserDTO.getUserId());
 		model.addAttribute("manageUserVO",getOne.getManageUserVO());
 		log.info(model);
 	}
@@ -56,7 +55,7 @@ public class ManageUserController {
 	@ResponseStatus(HttpStatus.OK)
 	public ResultDTO delete(@RequestBody ManageUserDTO manageUserDTO) {
 		ResultDTO result =new ResultDTO();
-		boolean isSuccess =manageUserService.delete(manageUserDTO.getManageUserVO().getMemId())>0;
+		boolean isSuccess =manageUserService.delete(manageUserDTO.getManageUserVO().getUserId())>0;
 		result.setSuccess(isSuccess);
 		String message = isSuccess?"삭제되었습니다.":"오류가 발생하였습니다.";
 		result.setMessage(message);
@@ -66,7 +65,7 @@ public class ManageUserController {
 	
 	@GetMapping("/detail")
 	public void selectUser(ManageUserDTO manageUserDTO, Model model) {
-		ManageUserDTO getOne =manageUserService.getOneUser(manageUserDTO.getMemId());
+		ManageUserDTO getOne =manageUserService.getOneUser(manageUserDTO.getUserId());
 		model.addAttribute("manageUserVO",getOne.getManageUserVO());
 		log.info(model);
 	}
@@ -85,7 +84,7 @@ public class ManageUserController {
 	
 	@GetMapping("/register")
 	public void register(ManageUserDTO manageUserDTO ,Model model) {
-		ManageUserDTO getOne = manageUserService.getOneUser(manageUserDTO.getMemId());
+		ManageUserDTO getOne = manageUserService.getOneUser(manageUserDTO.getUserId());
 		model.addAttribute("manageUserVO",getOne.getManageUserVO());
 		log.info(model);
 	}

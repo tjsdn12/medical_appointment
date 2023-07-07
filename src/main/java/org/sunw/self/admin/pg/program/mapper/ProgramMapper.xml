@@ -1,1 +1,112 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="org.sunw.self.admin.pg.program.mapper.ProgramMapper">
+	
+	<insert id="programInsert">
+		<selectKey order="AFTER" resultType="int">
+			SELECT INSERT_ID()
+		</selectKey>
+		INSERT INTO clinic.pg_option
+		(
+		PG_ID,
+		PG_OPTION_NAME,
+		PG_OPTION_CONTENT,
+		PG_OPTION_PRICE
+		)
+		VALUES
+		(
+		#{pgId},
+		#{pgOptionName},
+		#{pgOptionContent},
+		#{pgOptionPrice}
+		)
+	</insert>
+
+
+	<select id="getProgramList"
+	resultType="org.sunw.self.admin.pg.program.domain.ProgramVO">
+	SELECT
+		PG_ID,
+		CATEGORY_ID,
+		PG_NAME,
+		PG_CONTENT,
+		SURGERY_AREA,
+		PG_RUNNIN_TIME,
+		SORT_SEQ,
+		ROOM_TYPE,
+		USE_YN
+	FROM clinic.pg_program
+	<if test='name != null and name != "" '>
+		WHERE PG_ID LIKE CONCAT('%',#{pgId},'%')
+		</if>
+	ORDER BY PG_ID DESC
+	LIMIT #{skip},
+		#{perSheet}
+	</select>
+
+	
+	<select id="getProgramById"
+	resultType="org.sunw.self.admin.pg.program.domain.ProgramVO">
+	SELECT
+		PG_ID,
+		CATEGORY_ID,
+		PG_NAME,
+		PG_CONTENT,
+		SURGERY_AREA,
+		PG_RUNNIN_TIME,
+		SORT_SEQ,
+		ROOM_TYPE,
+		USE_YN
+	FROM clinic.pg_program
+	WHERE PG_ID=#{pgId}
+	</select>
+
+	<update id="programUpdate">
+		UPDATE clinic.pg_program
+		SET 
+		CATEGORY_ID			=#{categoryId}, 
+		PG_NAME				=#{pgName}, 
+		PG_CONTENT			=#{pgContent}, 
+		SURGERY_AREA		=#{surgeryArea}, 
+		PG_RUNNIN_TIME		=#{pgRunninTime}, 
+		SORT_SEQ			=#{sortSeq}, 
+		ROOM_TYPE			=#{roomType}, 
+		USE_YN				=#{useYn}
+		WHERE PG_ID			=#{pgId}
+	</update>
+
+	
+	<delete id="programDelete">
+	DELETE FROM clinic.pg_program
+	WHERE PG_ID			=#{pgId}
+	</delete>
+
+	
+	<select id="programListCnt" resultType="int">
+	SELECT COUNT(*)
+	FROM clinic.pg_program
+	</select>
+	
+	<select id="getCategoryList" 
+	resultType="org.sunw.self.admin.category.domain.CategoryVO">
+	SELECT 
+	CATEGORY_ID, 
+	CATEGORY_LEVEL, 
+	CATEGORY_NAME, 
+	USE_YN, 
+	UPPER_CATEGORY_ID
+	FROM clinic.ad_category;
+	</select>
+	
+	
+	
+	
+	
+
+	
+
+	
+</mapper>

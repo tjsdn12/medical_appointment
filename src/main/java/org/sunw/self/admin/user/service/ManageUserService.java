@@ -1,10 +1,10 @@
 
-package org.sunw.self.admin.user.user.service;
+package org.sunw.self.admin.user.service;
 
 import java.util.List;
 
-import org.sunw.self.admin.user.user.domain.ManageUserDTO;
-import org.sunw.self.admin.user.user.domain.ManageUserVO;
+import org.sunw.self.admin.user.domain.ManageUserDTO;
+import org.sunw.self.admin.user.domain.ManageUserVO;
 
 public interface ManageUserService {
 	
@@ -19,9 +19,9 @@ public interface ManageUserService {
 	
 	public int update(ManageUserDTO manageUserDTO);
 	
-	public int delete(String memId);
+	public int delete(String userId);
 	
-	ManageUserDTO getOneUser(String memId);
+	ManageUserDTO getOneUser(String userId);
 	
 	
 }

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper 
+namespace= "org.sunw.self.admin.user.mapper.ManageUserMapper">
+	<insert id="insert">
+		<selectKey order="AFTER" resultType="int">
+		SELECT LAST_INSERT_ID()
+		</selectKey>
+	INSERT INTO clinic.ad_user
+	(
+	USER_ID, 
+	PASSWORD, 
+	NAME, 
+	BIRTH, 
+	SEX, 
+	PHONE_NUMBER, 
+	AUTH
+	)
+	VALUES
+	(
+	#{userId}, 
+	#{password},
+	#{name}, 
+	#{birth},
+    #{sex}, 
+    #{phoneNumber}, 
+    #{auth} 
+	) 
+	
+	</insert>
+	
+	<select id="getAllUserList" 
+	resultType="org.sunw.self.admin.user.domain.ManageUserVO"
+	parameterType="org.sunw.self.admin.user.domain.ManageUserDTO">
+	SELECT 
+		USER_ID, 
+		PASSWORD, 
+		NAME, 
+		BIRTH, 
+		SEX, 
+		PHONE_NUMBER, 
+		AUTH
+	FROM clinic.ad_user
+	<if test='USER_ID != null and userId != "" '>
+		WHERE USER_ID LIKE CONCAT('%',#{userId},'%')
+		</if>
+	ORDER BY MEM_ID DESC
+	LIMIT #{skip},
+		#{perSheet}
+	</select>
+	
+	<select id="getUserListCnt" resultType="int">
+	SELECT COUNT(*)
+	FROM clinic.ad_user
+	</select>
+	
+	<select id="getOneUser"
+	resultType="org.sunw.self.admin.user.domain.ManageUserVO">
+	SELECT 
+		USER_ID, 
+		PASSWORD, 
+		NAME, 
+		BIRTH, 
+		SEX, 
+		PHONE_NUMBER, 
+		AUTH
+	FROM clinic.ad_user
+	WHERE USER_ID=#{userId}
+	</select>
+	
+	<select id="getUserCnt">
+	SELECT COUNT(*) FROM clinic.ad_user
+	</select>
+	
+	<update id="update">
+		UPDATE clinic.ad_user
+		SET 
+		PASSWORD			=#{password},
+		NAME				=#{name}, 
+		BIRTH				=#{birth}, 
+		SEX					=#{sex}, 
+		PHONE_NUMBER		=#{phoneNumber}, 
+		AUTH				=#{auth}
+		WHERE USER_ID		=#{userId}
+	</update>
+	
+	<delete id="delete">
+	DELETE FROM clinic.ad_user
+	WHERE USER_ID = #{userId}
+	</delete>
+	
+</mapper>  
+

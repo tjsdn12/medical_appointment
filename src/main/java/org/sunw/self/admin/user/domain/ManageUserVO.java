@@ -1,9 +1,9 @@
-package org.sunw.self.admin.user.manager.domain;
+package org.sunw.self.admin.user.domain;
+
 
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,21 +14,15 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class ManageManagerVO {
+public class ManageUserVO {
+	
 	String userId;
 	String password;
 	String name;
 	Date birth;
 	String sex;
-	String phoneNumber;
+	String phonNumber;
 	String auth;
+	
 
-	
-	public String userId() {
-        return userId;
-    }
-	
-	
 }
-
-

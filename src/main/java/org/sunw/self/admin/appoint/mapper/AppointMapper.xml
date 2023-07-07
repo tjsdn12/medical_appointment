@@ -111,7 +111,7 @@ namespace= "org.sunw.self.admin.appoint.mapper.AppointMapper">
 	
 	
 	<select id="getUserList"
-	resultType="org.sunw.self.admin.user.user.domain.ManageUserVO">
+	resultType="org.sunw.self.admin.user.domain.ManageUserVO">
 	SELECT 
 		USER_ID,
 		PASSWORD,

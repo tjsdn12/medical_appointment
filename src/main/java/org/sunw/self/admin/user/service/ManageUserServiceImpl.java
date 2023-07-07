@@ -1,11 +1,11 @@
-package org.sunw.self.admin.user.user.service;
+package org.sunw.self.admin.user.service;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-import org.sunw.self.admin.user.user.domain.ManageUserDTO;
-import org.sunw.self.admin.user.user.domain.ManageUserVO;
-import org.sunw.self.admin.user.user.mapper.ManageUserMapper;
+import org.sunw.self.admin.user.domain.ManageUserDTO;
+import org.sunw.self.admin.user.domain.ManageUserVO;
+import org.sunw.self.admin.user.mapper.ManageUserMapper;
 
 import lombok.RequiredArgsConstructor;
 
@@ -34,9 +34,9 @@ public class ManageUserServiceImpl implements ManageUserService {
 	}
 
 	@Override
-	public ManageUserDTO getOneUser(String memId) {
+	public ManageUserDTO getOneUser(String userId) {
 		ManageUserDTO manageUserDTO = new ManageUserDTO();
-		manageUserDTO.setManageUserVO(manageUserMapper.getOneUser(memId));
+		manageUserDTO.setManageUserVO(manageUserMapper.getOneUser(userId));
 		return manageUserDTO;
 	}
 	
@@ -54,8 +54,8 @@ public class ManageUserServiceImpl implements ManageUserService {
 	}
 
 	@Override
-	public int delete(String memId) {
-		return manageUserMapper.delete(memId);
+	public int delete(String userId) {
+		return manageUserMapper.delete(userId);
 	}
 
 

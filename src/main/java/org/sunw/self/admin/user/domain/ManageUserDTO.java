@@ -1,4 +1,4 @@
-package org.sunw.self.admin.user.user.domain;
+package org.sunw.self.admin.user.domain;
 
 import org.sunw.self.admin.common.domain.DefaultDTO;
 
@@ -9,8 +9,6 @@ import lombok.Data;
 public class ManageUserDTO extends DefaultDTO {
 	ManageUserVO manageUserVO;
 	
-	String memId;
-	
-	String memName;
+	String userId;
 }
 
