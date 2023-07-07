@@ -1,5 +1,6 @@
 package org.sunw.self.admin.common.login.controller;
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -18,7 +19,6 @@ import org.sunw.self.admin.common.domain.ResultDTO;
 import org.sunw.self.admin.common.login.domain.LoginDTO;
 import org.sunw.self.admin.common.login.domain.LoginVO;
 import org.sunw.self.admin.common.login.service.LoginService;
-import org.sunw.self.admin.infomation.store.domain.StoreInfoDTO;
 import org.sunw.self.admin.user.manager.domain.ManageManagerDTO;
 import org.sunw.self.admin.user.manager.domain.ManageManagerVO;
 import org.sunw.self.admin.user.manager.service.ManageManagerService;
@@ -51,9 +51,8 @@ public class LoginController {
 	public ResultDTO register(@RequestBody ManageManagerDTO manageManagerDTO) {
 		ResultDTO result = new ResultDTO();
 		ManageManagerVO vo = manageManagerDTO.getManageManagerVO();
-		vo.setApprovalStatus("0");
-		vo.setAuthorLevel("MANAGER");
-		boolean isSuccess = manageManagerService.insert(manageManagerDTO)>0;
+		vo.setAuth("MANAGER");
+		boolean isSuccess = manageManagerService.managerInsert(manageManagerDTO)>0;
 		result.setSuccess(isSuccess);
 		String message = isSuccess?"저장에 성공하였습니다.":"오류가 발생하였습니다.";
 		result.setMessage(message);

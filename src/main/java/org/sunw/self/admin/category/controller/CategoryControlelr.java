@@ -1,5 +1,4 @@
-package org.sunw.self.admin.appoint.controller;
-
+package org.sunw.self.admin.category.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,52 +11,34 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.sunw.self.admin.appoint.domain.AppointDTO;
-import org.sunw.self.admin.appoint.service.AppointService;
-import org.sunw.self.admin.common.domain.PageMaker;
+import org.sunw.self.admin.category.domain.CategoryDTO;
+import org.sunw.self.admin.category.service.CategoryService;
 import org.sunw.self.admin.common.domain.ResultDTO;
-
+import org.sunw.self.admin.user.user.domain.ManageUserDTO;
 
 import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
-@RequestMapping("/appoint")
-public class AppointController {
+@RequestMapping("/category")
+public class CategoryControlelr {
 	
 	@Autowired
-	AppointService appointService;
-	
-	
-	@GetMapping("/list")
-	public void goList(AppointDTO dto,Model model) {
-		
-		model.addAttribute("getAllInquiryList",appointService.getAllApppoint(dto));
-		PageMaker pageMaker = new PageMaker(dto, appointService.appintCnt(dto));
-		model.addAttribute("pageMaker", pageMaker);
-		
-	}
-	
+	CategoryService categoryService;
+
 	@GetMapping("/form")
-	public void form(AppointDTO dto ,Model model) {
-		AppointDTO getOne = appointService.getAppointId(dto.getApId());
-		model.addAttribute("appointVO",getOne.getAppointVO());
+	public void form(CategoryDTO dto ,Model model) {
+		CategoryDTO getOne = categoryService.getCategoryId(dto.getCategoryId());
+		model.addAttribute("categoryVO",getOne.getCategoryVO());
 		log.info(model);
-		
-		model.addAttribute("getUserList" ,appointService.getUserList());
-		
-		model.addAttribute("getProgramList" ,appointService.getProgramList());
-		
-		model.addAttribute("getRoomList" , appointService.getRoomList());
-		
 	}
-	
+
 	@PutMapping("/form")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
-	public ResultDTO save(@RequestBody AppointDTO dto) {
+	public ResultDTO save(@RequestBody CategoryDTO dto) {
 		ResultDTO result = new ResultDTO();
-		boolean isSuccess = appointService.appointUpdate(dto)>0;
+		boolean isSuccess = categoryService.categoryUpdate(dto)>0;
 		result.setSuccess(isSuccess);
 		String message = isSuccess?"저장에 성공하였습니다.":"오류가 발생하였습니다.";
 		result.setMessage(message);
@@ -67,9 +48,9 @@ public class AppointController {
 	@DeleteMapping("/list")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
-	public ResultDTO delete(@RequestBody AppointDTO dto) {
+	public ResultDTO delete(@RequestBody CategoryDTO dto) {
 		ResultDTO result =new ResultDTO();
-		boolean isSuccess =appointService.appointDelete(dto.getAppointVO().getapId())>0;
+		boolean isSuccess =categoryService.categoryDelete(dto.getCategoryVO().getCategoryId())>0;
 		result.setSuccess(isSuccess);
 		String message = isSuccess?"삭제되었습니다.":"오류가 발생하였습니다.";
 		result.setMessage(message);
@@ -78,18 +59,18 @@ public class AppointController {
 	}
 	
 	@GetMapping("/detail")
-	public void selectCategory(AppointDTO dto, Model model) {
-		AppointDTO getOne =appointService.getAppointId(dto.getApId());
-		model.addAttribute("appointVO",getOne.getApId());
+	public void selectCategory(CategoryDTO dto, Model model) {
+		CategoryDTO getOne =categoryService.getCategoryId(dto.getCategoryId());
+		model.addAttribute("categoryVO",getOne.getCategoryVO());
 		log.info(model);
 	}
-
+	
 	@PutMapping("/register")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
-	public ResultDTO register(@RequestBody AppointDTO dto) {
+	public ResultDTO register(@RequestBody CategoryDTO dto) {
 		ResultDTO result = new ResultDTO();
-		boolean isSuccess = appointService.appointInsert(dto)>0;
+		boolean isSuccess = categoryService.categoryInsert(dto)>0;
 		result.setSuccess(isSuccess);
 		String message = isSuccess?"저장에 성공하였습니다.":"오류가 발생하였습니다.";
 		result.setMessage(message);
@@ -97,9 +78,10 @@ public class AppointController {
 	}
 	
 	@GetMapping("/register")
-	public void register(AppointDTO dto ,Model model) {
-		AppointDTO getOne = appointService.getAppointId(dto.getApId());
-		model.addAttribute("appointVO",getOne.getAppointVO());
+	public void register(CategoryDTO dto ,Model model) {
+		CategoryDTO getOne = categoryService.getCategoryId(dto.getCategoryId());
+		model.addAttribute("categoryVO",getOne.getCategoryVO());
 		log.info(model);
 	}
+	
 }

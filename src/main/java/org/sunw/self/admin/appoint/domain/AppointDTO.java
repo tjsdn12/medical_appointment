@@ -7,10 +7,7 @@ import lombok.Data;
 @Data
 public class AppointDTO extends DefaultDTO{
 	
-	StoreInfoVO storeInfoVO;
+	AppointVO appointVO;
 	
-	String sId;
-	
-	String sName;
- 
+	Integer apId;
 }

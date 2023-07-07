@@ -104,11 +104,72 @@ namespace= "org.sunw.self.admin.appoint.mapper.AppointMapper">
 	</update>
 	
 	
-	
-	
-	
-	<delete id="delete">
-	DELETE FROM  SELF_WASH.STORE WHERE S_ID = #{sId}
+	<delete id="appointDelete">
+	DELETE FROM  medical_appointment.ap_appointment 
+	WHERE AP_ID = #{apId}
 	</delete>
+	
+	
+	<select id="getUserList"
+	resultType="org.sunw.self.admin.user.user.domain.ManageUserVO">
+	SELECT 
+		USER_ID,
+		PASSWORD,
+		NAME,
+		BIRTH,
+		SEX,
+		PHONE_NUMBER,
+		AUTH
+	FROM clinic.ad_user
+	</select>
+	
+	<select id="getProgramList"
+	resultType="org.sunw.self.admin.pg.program.domain.ProgramVO">
+	SELECT
+		PG_ID,
+		CATEGORY_ID,
+		PG_NAME,
+		PG_CONTENT,
+		SURGERY_AREA,
+		PG_RUNNIN_TIME,
+		SORT_SEQ,
+		ROOM_TYPE,
+		USE_YN
+	FROM clinic.pg_program
+	</select>
+	
+	<select id="getOptionList"
+	resultType="org.sunw.self.admin.pg.option.domain.OptionVO">
+	SELECT
+		PG_OPTION_ID,
+		PG_ID,
+		PG_OPTION_NAME,
+		PG_OPTION_CONTENT,
+		PG_OPTION_PRICE
+	FROM clinic.pg_option
+	</select>
+	
+	<select id="getRoomList"
+	resultType="org.sunw.self.admin.room.domain.RoomVO">
+	SELECT
+		PG_ROOM_ID,
+		PG_ROOM_NAME,
+		USE_YN,
+		ROOM_TYPE
+	FROM clinic.pg_room
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>  
 
