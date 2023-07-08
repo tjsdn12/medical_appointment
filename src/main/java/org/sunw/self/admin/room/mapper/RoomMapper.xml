@@ -1,1 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper 
+namespace= "org.sunw.self.admin.room.mapper.RoomMapper">
+	<insert id="roomInsert">
+		<selectKey order="AFTER" resultType="int">
+		SELECT LAST_INSERT_ID()
+		</selectKey>
+	INSERT INTO clinic.pg_room
+	(
+	PG_ROOM_NAME, 
+	USE_YN, 
+	ROOM_TYPE
+	)
+	VALUES
+	(
+	#{pgRoomName}, 
+	#{useYn},
+	#{roomType} 
+	) 
+	</insert>
+	
+	<select id="getAllRoom" 
+	resultType="org.sunw.self.admin.room.domain.RoomVO"
+	parameterType="org.sunw.self.admin.room.domain.RoomDTO">
+	SELECT 
+		PG_ROOM_ID, 
+		PG_ROOM_NAME, 
+		USE_YN, 
+		ROOM_TYPE
+	FROM clinic.pg_room
+	<if test='PG_ROOM_ID != null and pgRoomId != "" '>
+		WHERE PG_ROOM_ID LIKE CONCAT('%',#{pgRoomId},'%')
+		</if>
+	ORDER BY PG_ROOM_ID DESC
+	LIMIT #{skip},
+		#{perSheet}
+	</select>
+	
+	<select id="getRoomListCnt" resultType="int">
+	SELECT COUNT(*)
+	FROM clinic.pg_room
+	</select>
+	
+	<select id="selectOneRoom"
+	resultType="org.sunw.self.admin.room.domain.RoomVO">
+	SELECT 
+		PG_ROOM_ID, 
+		PG_ROOM_NAME, 
+		USE_YN, 
+		ROOM_TYPE
+	FROM clinic.pg_room
+	WHERE PG_ROOM_ID=#{pgRoomId}
+	</select>
+	
+	<select id="getRoomCnt">
+	SELECT COUNT(*) FROM clinic.pg_room
+	</select>
+	
+	<update id="update">
+		UPDATE clinic.pg_room
+		SET 
+		PG_ROOM_NAME		=#{pgRoomName}, 
+		USE_YN				=#{useYn}, 
+		ROOM_TYPE			=#{roomType}
+		WHERE PG_ROOM_ID	=#{pgRoomId}
+	</update>
+	
+	<delete id="delete">
+	DELETE FROM clinic.pg_room
+	WHERE PG_ROOM_ID = #{pgRoomId}
+	</delete>
+	
+</mapper>  
+

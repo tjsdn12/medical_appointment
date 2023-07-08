@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper 
+namespace= "org.sunw.self.admin.workday.date.mapper.WdDateMapper">
+	<insert id="dateInsert">
+		<selectKey order="AFTER" resultType="int">
+		SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO clinic.wd_date
+		(
+		PG_ROOM_ID, 
+		WORK_DATE, 
+		WD_ID, 
+		HOLIDAY_YN, 
+		DATE_START_DT, 
+		DATE_END_DT, 
+		DATE_REST_START_DT, 
+		DATE_REST_END_DT
+		)
+		VALUES
+		(
+		#{pgRoomId},
+		#{workDate},
+		#{wdId},
+		#{holidayYn},
+		#{dateStartDt},
+		#{dateEndDt},
+		#{dateRestStartDt},
+		#{dateRestEndDt}
+		)
+	</insert>
+	
+	<!-- 얘약에 대한 결과 사용자 아이디가 널이 아닐경우 값을 반환 -->
+	<select id="getAllDate"
+	resultType="org.sunw.self.admin.workday.date.domain.WdDateVO">
+	SELECT 
+		PG_ROOM_ID, 
+		WORK_DATE, 
+		WD_ID, 
+		HOLIDAY_YN, 
+		DATE_START_DT, 
+		DATE_END_DT, 
+		DATE_REST_START_DT, 
+		DATE_REST_END_DT
+	FROM clinic.wd_date
+	<if test='userId != null and userId != "" '>
+		WHERE WORK_DATE LIKE CONCAT('%',#{workDate},'%')
+		</if>
+	ORDER BY WORK_DATE DESC
+	LIMIT #{skip} ,
+			#{perSheet}
+	</select>
+	
+	<!-- 예약 갯수 반환 -->
+	<select id="DateCnt" resultType="int">
+	SELECT COUNT(*)
+	FROM medical_appointment.ap_appointment
+	</select>
+	
+	<!-- 예약 조회 -->
+	<select id="getOneDate"
+	resultType="org.sunw.self.admin.workday.date.domain.WdDateVO">
+	SELECT 
+		PG_ROOM_ID, 
+		WORK_DATE, 
+		WD_ID, 
+		HOLIDAY_YN, 
+		DATE_START_DT, 
+		DATE_END_DT, 
+		DATE_REST_START_DT, 
+		DATE_REST_END_DT
+	FROM clinic.wd_date
+	WHERE WORK_DATE=#{workDate}
+	</select>
+	
+	
+	<update id="DateUpdate">
+		UPDATE clinic.wd_date
+		SET 
+		WD_ID				=#{wdId}, 
+		HOLIDAY_YN			=#{holidayYn}, 
+		DATE_START_DT		=#{dateStartDt}, 
+		DATE_END_DT			=#{dateEndDt}, 
+		DATE_REST_START_DT	=#{dateRestStartDt}, 
+		DATE_REST_END_DT	=#{apId},
+		WHERE PG_ROOM_ID	=#{pgRoomId} AND WORK_DATE   	=#{workDate}
+	</update>
+	
+	
+	<delete id="DateDelete">
+	DELETE FROM  clinic.wd_date
+	WHERE WORK_DATE = #{workDate}
+	</delete>
+	
+	<select id="getRoomList"
+	resultType="org.sunw.self.admin.room.domain.RoomVO">
+	SELECT
+		PG_ROOM_ID,
+		PG_ROOM_NAME,
+		USE_YN,
+		ROOM_TYPE
+	FROM clinic.pg_room
+	</select>
+
+	<select id="getWorkList"
+	resultType="org.sunw.self.admin.workday.workday.domain.WdWorkdayVO">
+	SELECT 
+		WD_ID, 
+		WD_NAME, 
+		HOLIDAY_YN, 
+		WD_START_TIME, 
+		WD_END_TIME, 
+		WD_REST_START_TIME, 
+		WD_REST_END_TIME
+	FROM clinic.wd_workday
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>  
+
