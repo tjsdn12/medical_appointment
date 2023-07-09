@@ -69,7 +69,7 @@ public class AppointController {
 	@ResponseStatus(HttpStatus.OK)
 	public ResultDTO delete(@RequestBody AppointDTO dto) {
 		ResultDTO result =new ResultDTO();
-		boolean isSuccess =appointService.appointDelete(dto.getAppointVO().getapId())>0;
+		boolean isSuccess =appointService.appointDelete(dto.getAppointVO().getApId())>0;
 		result.setSuccess(isSuccess);
 		String message = isSuccess?"삭제되었습니다.":"오류가 발생하였습니다.";
 		result.setMessage(message);

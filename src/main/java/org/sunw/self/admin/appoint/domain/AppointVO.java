@@ -1,6 +1,5 @@
 package org.sunw.self.admin.appoint.domain;
 
-import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,10 +21,10 @@ public class AppointVO {
 	Integer pgRoomId;
 	Integer apDurationTime;
 	Integer apPrice;
-	Date apStartDt;
-	Date apEndDt;
+	String apStartDt;
+	String apEndDt;
 	String apStatus;
-	Date apDt;
+	String apDt;
 
 
 }

@@ -10,5 +10,7 @@ public class OptionDTO extends DefaultDTO{
 	OptionVO optionVO;
 	
 	Integer pgOptionId;
+	
+	String pgOptionName;
 
 }

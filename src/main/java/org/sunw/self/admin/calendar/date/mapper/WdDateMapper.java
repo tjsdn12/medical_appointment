@@ -1,11 +1,11 @@
-package org.sunw.self.admin.workday.date.mapper;
+package org.sunw.self.admin.calendar.date.mapper;
 
 import java.util.List;
 
+import org.sunw.self.admin.calendar.date.domain.WdDateDTO;
+import org.sunw.self.admin.calendar.date.domain.WdDateVO;
+import org.sunw.self.admin.calendar.workday.domain.WdWorkdayVO;
 import org.sunw.self.admin.room.domain.RoomVO;
-import org.sunw.self.admin.workday.date.domain.WdDateDTO;
-import org.sunw.self.admin.workday.date.domain.WdDateVO;
-import org.sunw.self.admin.workday.workday.domain.WdWorkdayVO;
 
 public interface WdDateMapper {
 	

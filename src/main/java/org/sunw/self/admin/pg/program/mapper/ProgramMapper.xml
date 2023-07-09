@@ -9,19 +9,26 @@
 		<selectKey order="AFTER" resultType="int">
 			SELECT INSERT_ID()
 		</selectKey>
-		INSERT INTO clinic.pg_option
+		INSERT INTO CLINIC.PG_PROGRAM
 		(
-		PG_ID,
-		PG_OPTION_NAME,
-		PG_OPTION_CONTENT,
-		PG_OPTION_PRICE
+		CATEGORY_ID, 
+		PG_NAME, 
+		PG_CONTENT, 
+		SURGERY_AREA, 
+		PG_RUNNIN_TIME, 
+		SORT_SEQ, 
+		ROOM_TYPE, 
+		USE_YN
 		)
 		VALUES
-		(
-		#{pgId},
-		#{pgOptionName},
-		#{pgOptionContent},
-		#{pgOptionPrice}
+		#{categoryId},
+		#{pgName},
+		#{pgContent},
+		#{surgeryArea},
+		#{pgRunninTime},
+		#{sortSeq},
+		#{roomType},
+		#{useYn}
 		)
 	</insert>
 
@@ -38,8 +45,8 @@
 		SORT_SEQ,
 		ROOM_TYPE,
 		USE_YN
-	FROM clinic.pg_program
-	<if test='name != null and name != "" '>
+	FROM CLINIC.PG_PROGRAM
+	<if test='pgName != null and pgName != "" '>
 		WHERE PG_ID LIKE CONCAT('%',#{pgId},'%')
 		</if>
 	ORDER BY PG_ID DESC
@@ -60,7 +67,7 @@
 		SORT_SEQ,
 		ROOM_TYPE,
 		USE_YN
-	FROM clinic.pg_program
+	FROM CLINIC.PG_PROGRAM
 	WHERE PG_ID=#{pgId}
 	</select>
 

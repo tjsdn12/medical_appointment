@@ -1,5 +1,14 @@
 package org.sunw.self.admin.history.domain;
 
-public class HistoryDTO {
+import org.sunw.self.admin.common.domain.DefaultDTO;
+
+import lombok.Data;
+
+@Data
+public class HistoryDTO extends DefaultDTO{
+	
+	HistoryVO historyVO;
+	
+	Integer apId;
 
 }

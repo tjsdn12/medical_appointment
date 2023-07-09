@@ -1,4 +1,4 @@
-package org.sunw.self.admin.workday.date.domain;
+package org.sunw.self.admin.calendar.date.domain;
 
 import java.util.Date;
 

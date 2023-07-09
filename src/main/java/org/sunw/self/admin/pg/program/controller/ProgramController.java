@@ -29,16 +29,16 @@ public class ProgramController {
 	ProgramService programService;
 	
 	@GetMapping("/form")
-	public void form (ProgramDTO dto,Model model) {
+	public void ProgramIdSerch (ProgramDTO dto,Model model) {
 		ProgramDTO getOne =programService.getProgramById(dto.getPgId());
-		model.addAttribute("programVO",getOne.getProgramVO());
+		model.addAttribute("ProgramVO",getOne.getProgramVO());
 		log.info(model);
 	}
 	
 	@PutMapping("/form")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
-	public ResultDTO save(@RequestBody ProgramDTO dto) {
+	public ResultDTO editProgramInfo(@RequestBody ProgramDTO dto) {
 		ResultDTO result = new ResultDTO();
 		boolean isSuccess = programService.programUpdate(dto)>0;
 		result.setSuccess(isSuccess);
@@ -62,14 +62,14 @@ public class ProgramController {
 	@GetMapping("/detail")
 	public void selectProgram(ProgramDTO dto,Model model) {
 		ProgramDTO getOne = programService.getProgramById(dto.getPgId());
-		model.addAttribute("programVO",getOne.getProgramVO());
+		model.addAttribute("ProgramVO",getOne.getProgramVO());
 		log.info(model);
 	}
 	
 	@PutMapping("/register")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
-	public ResultDTO register(@RequestBody ProgramDTO dto) {
+	public ResultDTO programInfoRegister(@RequestBody ProgramDTO dto) {
 		ResultDTO result = new ResultDTO();
 		boolean isSuccess = programService.programInsert(dto)>0;
 		result.setSuccess(isSuccess);

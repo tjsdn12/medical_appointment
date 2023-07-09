@@ -1,1 +1,170 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper 
+namespace= "org.sunw.self.admin.history.mapper.HistoryMapper">
+	<insert id="historyInsert">
+		<selectKey order="AFTER" resultType="int">
+		SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO clinic.ap_history
+		(
+		AP_ID, 
+		USER_ID, 
+		PG_ID, 
+		PG_OPTION_ID, 
+		PG_ROOM_ID, 
+		AP_HISTORY_PRICE, 
+		AP_HISTORY_START_DT, 
+		AP_HISTORY_END_DT, 
+		AP_HISTORY_STATUS, 
+		AP_HISTORY_DT
+		VALUES
+		(
+		#{apId},
+		#{userId},
+		#{pgId},
+		#{pgOptionId},
+		#{pgRoomId},
+		#{apHistoryPrice},
+		#{apHistoryStartDt},
+		#{apHistoryEndDt},
+		#{apHistoryStatus},
+		#{apHistoryDt},
+		)
+	</insert>
+	
+	<!-- 얘약에 대한 결과 사용자 아이디가 널이 아닐경우 값을 반환 -->
+	<select id="getAllHistory"
+	resultType="org.sunw.self.admin.history.domain.HistoryVO">
+	SELECT 
+		AP_ID, 
+		USER_ID, 
+		PG_ID, 
+		PG_OPTION_ID, 
+		PG_ROOM_ID, 
+		AP_HISTORY_PRICE, 
+		AP_HISTORY_START_DT, 
+		AP_HISTORY_END_DT, 
+		AP_HISTORY_STATUS, 
+		AP_HISTORY_DT
+	FROM clinic.ap_history
+	<if test='USER_ID != null and userId != "" '>
+		WHERE USER_ID LIKE CONCAT('%',#{userId},'%')
+		</if>
+	ORDER BY AP_ID DESC
+	LIMIT #{skip} ,
+			#{perSheet}
+	</select>
+	
+	<!-- 예약 갯수 반환 -->
+	<select id="historyCnt" resultType="int">
+	SELECT COUNT(*)
+	FROM clinic.ap_history
+	</select>
+	
+	<!-- 예약 조회 -->
+	<select id="getHistoryId"
+	resultType="org.sunw.self.admin.history.domain.HistoryVO">
+	SELECT 
+		AP_ID, 
+		USER_ID, 
+		PG_ID, 
+		PG_OPTION_ID, 
+		PG_ROOM_ID, 
+		AP_HISTORY_PRICE, 
+		AP_HISTORY_START_DT, 
+		AP_HISTORY_END_DT, 
+		AP_HISTORY_STATUS, 
+		AP_HISTORY_DT
+	FROM clinic.ap_history
+	WHERE AP_ID=#{apId}
+	</select>
+	
+	
+	<update id="historyUpdate">
+	UPDATE clinic.ap_history
+	SET 
+	USER_ID					=#{userId}, 
+	PG_ID					=#{pgId}, 
+	PG_OPTION_ID			=#{pgOptionId}, 
+	PG_ROOM_ID				=#{pgRoomId}, 
+	AP_HISTORY_PRICE		=#{apHistoryPrice}, 
+	AP_HISTORY_START_DT		=#{apHistoryStartDt}, 
+	AP_HISTORY_END_DT		=#{apHistoryEndDt}, 
+	AP_HISTORY_STATUS		=#{apHistoryStatus}, 
+	AP_HISTORY_DT			=now()
+	WHERE AP_ID				=#{apId}
+	</update>
+	
+	
+	<delete id="historoyDelete">
+	DELETE FROM  clinic.ap_history
+	WHERE AP_ID = #{apId}
+	</delete>
+	
+	
+	<select id="getUserList"
+	resultType="org.sunw.self.admin.user.domain.ManageUserVO">
+	SELECT 
+		USER_ID,
+		PASSWORD,
+		NAME,
+		BIRTH,
+		SEX,
+		PHONE_NUMBER,
+		AUTH
+	FROM clinic.ad_user
+	</select>
+	
+	<select id="getProgramList"
+	resultType="org.sunw.self.admin.pg.program.domain.ProgramVO">
+	SELECT
+		PG_ID,
+		CATEGORY_ID,
+		PG_NAME,
+		PG_CONTENT,
+		SURGERY_AREA,
+		PG_RUNNIN_TIME,
+		SORT_SEQ,
+		ROOM_TYPE,
+		USE_YN
+	FROM clinic.pg_program
+	</select>
+	
+	<select id="getOptionList"
+	resultType="org.sunw.self.admin.pg.option.domain.OptionVO">
+	SELECT
+		PG_OPTION_ID,
+		PG_ID,
+		PG_OPTION_NAME,
+		PG_OPTION_CONTENT,
+		PG_OPTION_PRICE
+	FROM clinic.pg_option
+	</select>
+	
+	<select id="getRoomList"
+	resultType="org.sunw.self.admin.room.domain.RoomVO">
+	SELECT
+		PG_ROOM_ID,
+		PG_ROOM_NAME,
+		USE_YN,
+		ROOM_TYPE
+	FROM clinic.pg_room
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>  
+

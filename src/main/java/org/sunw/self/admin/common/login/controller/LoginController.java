@@ -19,9 +19,9 @@ import org.sunw.self.admin.common.domain.ResultDTO;
 import org.sunw.self.admin.common.login.domain.LoginDTO;
 import org.sunw.self.admin.common.login.domain.LoginVO;
 import org.sunw.self.admin.common.login.service.LoginService;
-import org.sunw.self.admin.user.manager.domain.ManageManagerDTO;
-import org.sunw.self.admin.user.manager.domain.ManageManagerVO;
-import org.sunw.self.admin.user.manager.service.ManageManagerService;
+import org.sunw.self.admin.user.domain.ManageUserDTO;
+import org.sunw.self.admin.user.domain.ManageUserVO;
+import org.sunw.self.admin.user.service.ManageUserService;
 
 @Controller
 @RequestMapping("/common/login")
@@ -31,7 +31,7 @@ public class LoginController {
 	LoginService loginService;
 	
 	@Autowired
-	ManageManagerService manageManagerService;
+	ManageUserService manageUserService;
 	
 	
 	@GetMapping("/login")
@@ -42,17 +42,17 @@ public class LoginController {
 	}
 	
 	@GetMapping("/register")
-	public void register(ManageManagerDTO manageManagerDTO, Model model) {
+	public void register(ManageUserDTO manageUserDTO, Model model) {
 	}
 	
 	@PutMapping("/register")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
-	public ResultDTO register(@RequestBody ManageManagerDTO manageManagerDTO) {
+	public ResultDTO register(@RequestBody ManageUserDTO dto) {
 		ResultDTO result = new ResultDTO();
-		ManageManagerVO vo = manageManagerDTO.getManageManagerVO();
+		ManageUserVO vo = dto.getManageUserVO();
 		vo.setAuth("MANAGER");
-		boolean isSuccess = manageManagerService.managerInsert(manageManagerDTO)>0;
+		boolean isSuccess = manageUserService.insert(dto)>0;
 		result.setSuccess(isSuccess);
 		String message = isSuccess?"저장에 성공하였습니다.":"오류가 발생하였습니다.";
 		result.setMessage(message);

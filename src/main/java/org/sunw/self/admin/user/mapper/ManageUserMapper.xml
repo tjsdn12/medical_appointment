@@ -43,8 +43,8 @@ namespace= "org.sunw.self.admin.user.mapper.ManageUserMapper">
 		PHONE_NUMBER, 
 		AUTH
 	FROM clinic.ad_user
-	<if test='USER_ID != null and userId != "" '>
-		WHERE USER_ID LIKE CONCAT('%',#{userId},'%')
+	<if test='NAME != null and name != "" '>
+		WHERE NAME LIKE CONCAT('%',#{name},'%')
 		</if>
 	ORDER BY MEM_ID DESC
 	LIMIT #{skip},
@@ -90,6 +90,7 @@ namespace= "org.sunw.self.admin.user.mapper.ManageUserMapper">
 	DELETE FROM clinic.ad_user
 	WHERE USER_ID = #{userId}
 	</delete>
+	
 	
 </mapper>  
 

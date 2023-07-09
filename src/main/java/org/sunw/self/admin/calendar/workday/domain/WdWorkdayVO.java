@@ -1,4 +1,4 @@
-package org.sunw.self.admin.workday.workday.domain;
+package org.sunw.self.admin.calendar.workday.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,5 +1,6 @@
 package org.sunw.self.admin.pg.option.domain;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,6 +21,6 @@ public class OptionVO {
 	String pgOptionContent;
 	Integer pgOptionPric;
 	
-
+	
 
 }

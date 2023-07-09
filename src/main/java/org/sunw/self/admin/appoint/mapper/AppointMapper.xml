@@ -32,9 +32,9 @@ namespace= "org.sunw.self.admin.appoint.mapper.AppointMapper">
 		#{apDurationTime},
 		#{apPrice},
 		#{apStartDt},
-		#{apEndDt},
+		now(),
 		#{apStatus},
-		#{apDt}
+		now()
 		)
 	</insert>
 	
@@ -56,7 +56,7 @@ namespace= "org.sunw.self.admin.appoint.mapper.AppointMapper">
 	<if test='userId != null and userId != "" '>
 		WHERE USER_ID LIKE CONCAT('%',#{userId},'%')
 		</if>
-	ORDER BY USER_ID DESC
+	ORDER BY AP_ID DESC
 	LIMIT #{skip} ,
 			#{perSheet}
 	</select>
@@ -97,9 +97,9 @@ namespace= "org.sunw.self.admin.appoint.mapper.AppointMapper">
 		AP_DURATION_TIME	=#{apDurationTime}, 
 		AP_PRICE			=#{apPrice}, 
 		AP_START_DT			=#{apStartDt},
-		AP_END_DT			=#{apEndDt},
+		AP_END_DT			=now()
 		AP_STATUS			=#{apStatus}
-		AP_DT				=#{apDt}
+		AP_DT				=now()
 		WHERE AP_ID			=#{apid}
 	</update>
 	
