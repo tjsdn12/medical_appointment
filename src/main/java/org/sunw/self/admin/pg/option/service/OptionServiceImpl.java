@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.sunw.self.admin.pg.option.domain.OptionDTO;
 import org.sunw.self.admin.pg.option.domain.OptionVO;
 import org.sunw.self.admin.pg.option.mapper.OptionMapper;
-import org.sunw.self.admin.pg.program.domain.ProgramVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -58,13 +57,7 @@ public class OptionServiceImpl implements OptionService{
 		return optionMapper.optionListCnt(dto);
 	}
 
-	@Override
-	public List<ProgramVO> getProgramList() {
 
-		List<ProgramVO> ProgramList =optionMapper.getProgramList();
-		return ProgramList;
-	}
-	
 	
 
 }

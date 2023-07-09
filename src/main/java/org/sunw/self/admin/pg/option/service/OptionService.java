@@ -21,7 +21,7 @@ public interface OptionService {
 	public int optionListCnt(OptionDTO dto);
 	
 	
-	public List<ProgramVO>getProgramList();
+
 	
 
 }

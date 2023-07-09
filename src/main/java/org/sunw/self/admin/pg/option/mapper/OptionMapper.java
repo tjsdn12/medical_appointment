@@ -20,6 +20,6 @@ public interface OptionMapper {
 	
 	public int optionListCnt(OptionDTO dto);
 	
-	public List<ProgramVO>getProgramList();
+
 	
 }

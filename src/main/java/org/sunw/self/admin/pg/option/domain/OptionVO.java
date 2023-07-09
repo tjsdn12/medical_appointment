@@ -20,7 +20,7 @@ public class OptionVO {
 	String pgOptionName;
 	String pgOptionContent;
 	Integer pgOptionPric;
-	
+	String pgName;
 	
 
 }
