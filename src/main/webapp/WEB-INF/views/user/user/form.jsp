@@ -7,98 +7,138 @@
 		<div class="card">
 			<form class="form-horizontal" id="actionForm">
 				<div class="card-body">
-					<h4 class="card-title">UserformPage</h4>
+					<h4 class="card-title">ManageUserformPage</h4>
 					<div class="form-group row">
-						<label for="memId"
-							class="col-sm-3 text-end control-label col-form-label">아이디</label>
-						<div class="col-sm-9">
-							<input type="text" class="form-control" name="memId" id="memId"
-								value="<c:out value='${manageUserVO.memId }'></c:out>" readonly="readonly">
-						</div>
-					</div>
-					<div class="form-group row">
-						<label for="memName"
-							class="col-sm-3 text-end control-label col-form-label">이름</label>
-						<div class="col-sm-9">
-							<input type="text" class="form-control" name="memName" id="memName"
-								value="<c:out value='${manageUserVO.memName }'></c:out>">
-						</div>
-					</div>
-					<div class="form-group row">
-						<label for="phone"
+						<label for="phonNumber"
 							class="col-sm-3 text-end control-label col-form-label">전화번호</label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" id="phone" name="phone"
-								value="<c:out value='${manageUserVO.phone }'></c:out>">
+							<input type="text" class="form-control" id="phonNumber"
+								name="phonNumber"
+								value="<c:out value='${manageUserVO.phonNumber }'></c:out>">
+							<input type="submit" value="인증요청">
 						</div>
 					</div>
 					<div class="form-group row">
-						<label for="kakaoAuthorizationKey"
-							class="col-sm-3 text-end control-label col-form-label">카카오
-							인증</label>
+						<label for="name"
+							class="col-sm-3 text-end control-label col-form-label">이름</label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control"
-								id="kakaoAuthorizationKey" name="kakaoAuthorizationKey"
-								value="<c:out value='${manageUserVO.kakaoAuthorizationKey }'></c:out>">
+							<input type="text" class="form-control" name="name" id="name"
+								value="<c:out value='${manageUserVO.name }'></c:out>">
 						</div>
 					</div>
 					<div class="form-group row">
-						<label for="pw"
+						<label for="password"
 							class="col-sm-3 text-end control-label col-form-label">비밀번호</label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" id="pw" name="pw"
-								value="<c:out value='${manageUserVO.pw }'></c:out>">
+							<input type="text" class="form-control" id="password"
+								name="password"
+								value="<c:out value='${manageUserVO.password }'></c:out>">
 						</div>
-					</div>
-					<div class="form-group row">
-						<label for="joinDate"
-							class="col-sm-3 text-end control-label col-form-label">가입일자</label>
-						<div class="col-sm-9">
-							<input type="text" class="form-control" id="joinDate" name="joinDate" 
-								value="<c:out value='${manageUserVO.joinDate }'></c:out>">
+
+						<!-- birth -->
+						<div>
+							<h3>
+								<label for="yy">생년월일</label>
+							</h3>
+							<div id="birth">
+								<!-- birth_YY -->
+								<div id="birth_YY">
+									<span class="box"> <input type="text" id="birth_YY"
+										class="int" maxlength="4" placeholder="년(4)">
+									</span>
+								</div>
+								<!-- birth_MM -->
+								<div id="birth_MM">
+									<span class="box"> <select id="birth_MM">
+											<option>월</option>
+											<option value="01">1</option>
+											<option value="02">2</option>
+											<option value="03">3</option>
+											<option value="04">4</option>
+											<option value="05">5</option>
+											<option value="06">6</option>
+											<option value="07">7</option>
+											<option value="08">8</option>
+											<option value="09">9</option>
+											<option value="10">10</option>
+											<option value="11">11</option>
+											<option value="12">12</option>
+									</select>
+									</span>
+								</div>
+								<!-- birth_DD -->
+								<div id="birth_DD">
+									<span class="box"> <input type="text" id="birth_DD"
+										class="int" maxlength="2" placeholder="일">
+									</span>
+								</div>
+							</div>
+							<span class="error_next_box"></span>
 						</div>
-					</div>
-					<div class="form-group row">
-						<label for="amountCharge"
-							class="col-sm-3 text-end control-label col-form-label">충전금액</label>
-						<div class="col-sm-9">
-							<input type="text" class="form-control" id="amountCharge"
-								name="amountCharge"
-								value="<c:out value='${manageUserVO.amountCharge }'></c:out>">
+
+
+
+						<div class="form-group row">
+							<label for="password"
+								class="col-sm-3 text-end control-label col-form-label">비밀번호</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="password"
+									name="password"
+									value="<c:out value='${manageUserVO.password }'></c:out>">
+							</div>
 						</div>
-					</div>
-					<div class="form-group row">
-						<label for="point"
-							class="col-sm-3 text-end control-label col-form-label">회원포인트</label>
-						<div class="col-sm-9">
-							<input type="text" class="form-control" id="point" name="point"
-								value="<c:out value='${manageUserVO.point }'></c:out>">
+						<div class="form-group row">
+							<label for="joinDate"
+								class="col-sm-3 text-end control-label col-form-label">가입일자</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="joinDate"
+									name="joinDate"
+									value="<c:out value='${manageUserVO.joinDate }'></c:out>">
+							</div>
 						</div>
-					</div>
-					<div class="form-group row">
-						<label for="dateOfUse"
-							class="col-sm-3 text-end control-label col-form-label">이용일자</label>
-						<div class="col-sm-9">
-							<input type="text" class="form-control" id="dateOfUse" name="dateOfUse" 
-								value="<c:out value='${manageUserVO.dateOfUse }'></c:out>">
+						<div class="form-group row">
+							<label for="amountCharge"
+								class="col-sm-3 text-end control-label col-form-label">충전금액</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="amountCharge"
+									name="amountCharge"
+									value="<c:out value='${manageUserVO.amountCharge }'></c:out>">
+							</div>
 						</div>
-					</div>
-					<div class="form-group row">
-						<label for="memStatus"
-							class="col-sm-3 text-end control-label col-form-label">회원상태</label>
-						<div class="col-sm-9">
-							<select name="memStatus" id="memStatus">
-								<option value="HUMEN" selected="selected">휴먼회원</option>
-								<option value="DROPOUT" selected="selected">탈퇴회원</option>
-							</select>
+						<div class="form-group row">
+							<label for="point"
+								class="col-sm-3 text-end control-label col-form-label">회원포인트</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="point" name="point"
+									value="<c:out value='${manageUserVO.point }'></c:out>">
+							</div>
 						</div>
-					</div>
-					<div class="border-top">
-						<div class="card-body">
-							<button type="button" id="modifyBtn" class="btn btn-primary"
-								onclick="save()">저장</button>
-							<button type="button" id="cancelBtn" class="btn btn-primary"
-								onclick="goList()">취소</button>
+						<div class="form-group row">
+							<label for="dateOfUse"
+								class="col-sm-3 text-end control-label col-form-label">이용일자</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="dateOfUse"
+									name="dateOfUse"
+									value="<c:out value='${manageUserVO.dateOfUse }'></c:out>">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="memStatus"
+								class="col-sm-3 text-end control-label col-form-label">회원상태</label>
+							<div class="col-sm-9">
+								<select name="memStatus" id="memStatus">
+									<option value="HUMEN" selected="selected">휴먼회원</option>
+									<option value="DROPOUT" selected="selected">탈퇴회원</option>
+								</select>
+							</div>
+						</div>
+						<div class="border-top">
+							<div class="card-body">
+								<button type="button" id="modifyBtn" class="btn btn-primary"
+									onclick="save()">저장</button>
+								<button type="button" id="cancelBtn" class="btn btn-primary"
+									onclick="goList()">취소</button>
+							</div>
 						</div>
 					</div>
 			</form>
@@ -153,4 +193,17 @@
 						form.action = "/user/user/form";
 						document.querySelector("#actionForm").submit();
 					});
+
+	/* SECTION - BIRTH */
+	.info#info__birth {
+	  display: flex;
+	}
+
+	.info#info__birth select {
+	  margin-left : 7px;
+	}
+
+	.info#info__birth select:first-child {
+	  margin-left : 0px;
+	}
 </script>

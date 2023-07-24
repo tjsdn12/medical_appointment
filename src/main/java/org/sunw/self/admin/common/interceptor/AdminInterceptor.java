@@ -6,7 +6,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.sunw.self.admin.common.login.domain.LoginVO;
-import org.sunw.self.admin.user.manager.domain.ManageManagerVO;
 
 public class AdminInterceptor extends HandlerInterceptorAdapter{
 

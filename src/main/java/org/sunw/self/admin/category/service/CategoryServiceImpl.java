@@ -2,19 +2,19 @@ package org.sunw.self.admin.category.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.sunw.self.admin.category.domain.CategoryDTO;
 import org.sunw.self.admin.category.domain.CategoryVO;
 import org.sunw.self.admin.category.mapper.CategoryMapper;
 
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
 
 	private final CategoryMapper categoryMapper;
 	
-	@Autowired
-	public CategoryServiceImpl(CategoryMapper categoryMapper) {
-		this.categoryMapper=categoryMapper;
-	}
 	
 	@Override
 	public int categoryInsert(CategoryDTO dto) {

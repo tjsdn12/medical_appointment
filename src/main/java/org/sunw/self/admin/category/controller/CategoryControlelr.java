@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.sunw.self.admin.category.domain.CategoryDTO;
 import org.sunw.self.admin.category.service.CategoryService;
 import org.sunw.self.admin.common.domain.ResultDTO;
-import org.sunw.self.admin.user.user.domain.ManageUserDTO;
 
 import lombok.extern.log4j.Log4j;
 

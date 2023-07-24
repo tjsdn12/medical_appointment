@@ -11,10 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.sunw.self.admin.appoint.domain.WdWorkdayDTO;
 import org.sunw.self.admin.calendar.workday.domain.WdWorkdayDTO;
 import org.sunw.self.admin.calendar.workday.service.WdworkdayService;
-import org.sunw.self.admin.category.domain.CategoryDTO;
 import org.sunw.self.admin.common.domain.PageMaker;
 import org.sunw.self.admin.common.domain.ResultDTO;
 

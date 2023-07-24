@@ -13,57 +13,74 @@
 						data-bs-toggle="dropdown" aria-haspopup="true"
 						aria-expanded="false">Sheet</button>
 					<div class="dropdown-menu" style="margin: 0px;">
-						<a class="dropdown-item" href="10">10</a> <a class="dropdown-item"
-							href="20">20</a> <a class="dropdown-item" href="50">50</a> <a
-							class="dropdown-item" href="100">100</a>
+						<a class="dropdown-item" href="?perSheet=10">10</a> <a class="dropdown-item"
+							href="20">20</a> <a class="dropdown-item" href="?perSheet=50">50</a> <a
+							class="dropdown-item" href="?perSheet=100">100</a>
 					</div>
-					<h3 class="card-title mb-0" style="margin-left: 50px">ManagerList</h3>
+					<h3 class="card-title mb-0" style="margin-left: 50px">StoreInfo List</h3>
 				</div>
 			</div>
-				<div class="form-group row">
-						<label for="mgrName"
-							class="col-sm-3 text-end control-label col-form-label">이름</label>
+			
+			<div class="form-group row">
+						<label for="sName"
+							class="col-sm-3 text-end control-label col-form-label">매장찾기</label>
 						<div class="col-sm-4">
-							<input type="text" class="form-control" name="mgrName" id="mgrName"
-								value="<c:out value='${manageManagerVO.mgrName }'></c:out>">
+							<input type="text" class="form-control" name="sName" id="sName"
+								value="<c:out value='${storeInfoVO.sName }'></c:out>">
 								<button class="search" type="button" id="search" onclick="search();" value="N">검색</button>
 
 						</div>
 					</div>
+			
 			<div class="list-responsive">
 				<table class="table">
 					<thead class="thead-light">
 						<tr>
-							<th><label class="customcheckbox mb-3"> <input
+							<c:if test="${loginInfo.authorLevel == 'ADMIN' }">
+							<th>
+							<label class="customcheckbox mb-3"> <input
 									type="checkbox" id="mainCheckbox" /> <span class="checkmark"></span>
-							</label></th>
-							<th scope="col">아이디</th>
-							<th scope="col">이름</th>
-							<th scope="col">비밀번호</th>
-							<th scope="col">메일</th>
-							<th scope="col">전화번호</th>
-							<th scope="col"><input type="button" value="등록"
-								class="btn-info" onclick="location.href='/user/manager/register'">
+							</label></th></c:if>
+							<th scope="col">매장번호</th>
+							<th scope="col">상호명</th>
+							<th scope="col">가게주소</th>
+							<th scope="col">관리자</th>
+							<th scope="col">시도구분</th>
+							<th scope="col">시군구분</th>
+							<th scope="col">사업자 번호</th>
+							<th scope="col">관리자 주민번호</th>
+							<th scope="col">우편번호</th>
+							<th scope="col">
+							<c:if test="${loginInfo.authorLevel == 'ADMIN' }">
+							<input type="button" value="매장등록"
+								class="btn-info" onclick="location.href='/info/storeinfo/register'">
+								</c:if>
 							</th>
 						</tr>
 					</thead>
 
 					<tbody class="customtable">
-						<c:forEach items="${getAllManagerList }" var="item2">
+						<c:forEach items="${getAllStoreInfoList }" var="item2">
 							<tr>
+								<c:if test="${loginInfo.authorLevel == 'ADMIN' }">
 								<td><label class="customcheckbox"> <input
-										type="checkbox" class="listCheckbox" value="${item2.mgrId }" />
-										<span class="checkmark"></span>
+										type="checkbox" class="listCheckbox" value="${item2.sId }" />
+										<span class="checkmark"></span></c:if>
 								</label></td>
-								<td><a href="#" onclick="goSelect(this)">${item2.mgrId }</a></td>
-								<td>${item2.mgrName }</td>
-								<td>${item2.pw }</td>
-								<td>${item2.email }</td>
-								<td>${item2.phone }</td>
+								<td><a href="#" onclick="goSelect(this)">${item2.sId }</a></td>
+								<td>${item2.sName }</td>
+								<td>${item2.sLocation }</td>
+								<td>${item2.manager }</td>
+								<td>${item2.attemptClassification }</td>
+								<td>${item2.cityCountyClassification }</td>
+								<td>${item2.businessNumber }</td>
+								<td>${item2.managerResidentNumber }</td>
+								<td>${item2.postCode }</td>
 								<td>
-								
 					<div class="card-body">
-						<button type="button" id="modifyBtn" class="btn btn-primary" onclick="deleteMgr(<c:out value='${item2.mgrId }'/>)">삭제</button>
+					<c:if test="${loginInfo.authorLevel == 'ADMIN'}">
+						<button type="button" id="modifyBtn" class="btn btn-primary" onclick="deletesId(<c:out value='${item2.sId }'/>)">삭제</button>
+						</c:if>
 					</div>
 								</td>
 							</tr>
@@ -108,12 +125,15 @@
 
 <%@include file="/WEB-INF/views/includes/modal.jsp"%>
 
-<form id="actionForm" action="/manager/list" method="get">
+<form id="actionForm" action="/storeinfo/list" method="get" >
 	<input type="hidden" name="page" value="${pageMaker.pageDTO.page }" class="current_page">
 	<input type="hidden" name="perSheet" value="${pageMaker.pageDTO.perSheet }" class="current_perSheet">
 </form>
 
-<script>
+
+<%@include file="/WEB-INF/views/includes/footer.jsp"%>
+
+<script type="text/javascript">
 
 document.querySelectorAll(".page-link").forEach(a=>{
 	   a.addEventListener("click",function (e){
@@ -123,47 +143,26 @@ document.querySelectorAll(".page-link").forEach(a=>{
 	       document.querySelector("#actionu").submit();
 	   },false)
 	});
-	
-	
 	function goSelect(dom){
 		console.log(dom);
-		const mgrId =dom.innerHTML;
+		const sId =dom.innerHTML;
 		
 		const form =document.querySelector("#actionForm");
 		
-		form.action ="/user/manager/detail";
+		form.action ="/info/storeinfo/detail";
 		
 		form.method = "get";
 		
-		form.innerHTML = "<input type ='hidden' name ='mgrId' value='"+mgrId+"' />";
+		form.innerHTML = "<input type ='hidden' name ='sId' value='"+sId+"' />";
 		
 		form.submit();
 		
 	}
 	
-	function search(){
-		console.log();
-		
-		const mgrName =document.querySelector("#mgrName").value;
-		
-		const form =document.querySelector("#actionForm");
-		
-		form.action ="/user/manager/list";
-		
-		form.method = "get";
-		
-		form.innerHTML = "<input type ='hidden' name ='mgrName' value='"+mgrName+"' />";
-		
-		form.submit();
-		
-	}
-	
-
-	
-	function deleteMgr(mgrId) {
+	function deletesId(sId) {
 		const data = $('#actionForm').serializeObject();
 		$.ajax({
-			url : '/user/manager/list',
+			url : '/info/storeinfo/list',
 			type : 'Delete',
 			//응답 받고 
 			headers : { // Http header
@@ -172,7 +171,7 @@ document.querySelectorAll(".page-link").forEach(a=>{
 			},
 			//
 			dataType : 'JSON', // 데이터 타입 (html, xml, json, text 등등)
-			data : JSON.stringify({manageManagerVO: {mgrId:mgrId}}),
+			data : JSON.stringify({storeInfoVO: {sId:sId}}),
 			success : function onData(data) {
 				alert(data.message);
 				if(data.success) {
@@ -185,6 +184,23 @@ document.querySelectorAll(".page-link").forEach(a=>{
 				console.error(error);
 			}
 		});
+	}
+	
+	function search(){
+		console.log();
+		
+		const sName =document.querySelector("#sName").value;
+		
+		const form =document.querySelector("#actionForm");
+		
+		form.action ="/info/storeinfo/list";
+		
+		form.method = "get";
+		
+		form.innerHTML = "<input type ='hidden' name ='sName' value='"+sName+"' />";
+		
+		form.submit();
+		
 	}
 	
 

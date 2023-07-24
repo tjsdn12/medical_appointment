@@ -15,8 +15,8 @@
 			PHONE_NUMBER, 
 			AUTH
 		FROM clinic.ad_user
-		WHERE NAME = #{NAME}
-		AND PASSWORD = #{PASSWORD}
+		WHERE NAME = #{name}
+		AND PASSWORD = #{password}
 
 	</select>
 	
